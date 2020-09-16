@@ -11,17 +11,15 @@
       >
         <router-link :to="{ name: 'Cars' }" class="nav-link">Cars</router-link>
       </li>
-      <li class="nav-item" :class="{ active: $route.name == 'Jobs' }">
-        <router-link :to="{ name: 'Jobs' }" class="nav-link">Jobs</router-link>
+      <li class="nav-item" :class="{ active: $route.name == 'Houses' }">
+        <router-link :to="{ name: 'Houses' }" class="nav-link">Houses</router-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>

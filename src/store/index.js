@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     cars: [],
-    activeCar: {}
+    activeCar: {},
+    houses: [],
+    activeHouse: {}
   },
   mutations: {
     setCars(state, cars) {
@@ -22,6 +24,18 @@ export default new Vuex.Store({
     },
     removeCar(state, id) {
       state.cars = state.cars.filter(c => c.id != id)
+    },
+    setHouses(state, houses) {
+      state.houses = houses
+    },
+    addHouse(state, house) {
+      state.houses.push(house)
+    },
+    setActiveHouse(state, house) {
+      state.activeHouse = house
+    },
+    removeHouse(state, id) {
+      state.houses = state.houses.filter(h => h.id != id)
     }
   },
   actions: {
@@ -74,6 +88,50 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
-    }
+    },
+    async getAllHouses({ commit }) {
+      try {
+        let res = await api.get('houses')
+        commit("setHouses", res.data.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getHouseById({ commit }, id) {
+      try {
+        let res = await api.get('houses/' + id)
+        commit("setActiveHouse", res.data.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async createHouse({ commit }, newHouse) {
+      try {
+        let res = await api.post('houses', newHouse)
+        commit("addHouse", res.data.data)
+        commit("setActiveHouse", res.data.data)
+        router.push({ name: "HouseDetails", params: { id: res.data.data._id } })
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async bid({ commit }, bid) {
+      try {
+        let res = await api.put('houses/' + bid.id, bid)
+        commit("setActiveHouse", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteHouse({ commit }, id) {
+      try {
+        await api.delete('houses/' + id)
+        commit("removeHouse", id)
+        commit("setActiveHouse", {})
+        router.push({ name: "Houses" })
+      } catch (error) {
+        console.error(error)
+      }
+    },
   }
 })

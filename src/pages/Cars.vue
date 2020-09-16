@@ -82,36 +82,35 @@
 </template>
 
 <script>
-import Car from "../components/Car.vue"
+import Car from "../components/Car.vue";
 export default {
   name: "Cars",
   mounted() {
-    this.$store.dispatch('getAllCars')
+    this.$store.dispatch("getAllCars");
   },
   data() {
     return {
-      newCar: {}
-    }
+      newCar: {},
+    };
   },
   computed: {
     cars() {
-      return this.$store.state.cars
-    }
+      return this.$store.state.cars;
+    },
   },
   methods: {
     createCar() {
-      this.$store.dispatch("createCar", this.newCar)
+      this.$store.dispatch("createCar", this.newCar);
       // PROTIP the object retains reference so we cant just reset it we will need to reset the form instead
       for (let key in this.newCar) {
-        this.newCar[key] = null
+        this.newCar[key] = null;
       }
-
-    }
+    },
   },
   components: {
-    Car
-  }
-}
+    Car,
+  },
+};
 </script>
 
 <style>

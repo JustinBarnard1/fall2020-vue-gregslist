@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import CarDetails from '../pages/CarDetails.vue'
 import Cars from '../pages/Cars.vue'
+import Houses from '../pages/Houses.vue'
+import HouseDetails from '../pages/HouseDetails.vue'
 
 Vue.use(VueRouter)
 
@@ -19,12 +21,12 @@ const routes = [
   {
     path: '/houses',
     name: 'Houses',
-    component: Cars
+    component: Houses
   },
   {
     path: '/houses/:id',
     name: 'HouseDetails',
-    component: CarDetails
+    component: HouseDetails
   },
   {
     path: '*',
