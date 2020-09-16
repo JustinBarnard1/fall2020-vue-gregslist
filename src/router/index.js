@@ -17,6 +17,16 @@ const routes = [
     component: CarDetails
   },
   {
+    path: '/houses',
+    name: 'Houses',
+    component: Cars
+  },
+  {
+    path: '/houses/:id',
+    name: 'HouseDetails',
+    component: CarDetails
+  },
+  {
     path: '*',
     redirect: '/cars'
   }
